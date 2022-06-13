@@ -71,7 +71,10 @@ ggsave(nam, width = 15, height = 6, units = "in", dpi = 300)
 mtodasplotPV
 
 # -------------------- NEUTRAL PLOT ----------------------------------------
-rm(x)
+
+rm(list = ls())
+
+load("Men_Data/Men_Plots.RData")
 
 Group <- c(rep("Incongruent", nrow(Men)), rep("Neutral", nrow(Men_neutral)))
 x <- data.frame(rbind(Men,Men_neutral))
@@ -111,16 +114,16 @@ in1 <- wilcox.test(data100,data100n)
 in2 <- wilcox.test(data140,data140n)
 in3 <- wilcox.test(data180,data180n)
 
-in1 <- ifelse(in1$p.value < 0.001, 
-              paste0("100 vs 100" ," = ", "< 1e-04"),
+in1 <- ifelse(in1$p.value < 0.0006, 
+              paste0("100 vs 100" ," = ", "< 6e-04"),
               paste0("100 vs 100" ," = ", as.character(round(in1$p.value, 3))))
 
-in2 <- ifelse(in2$p.value < 0.001, 
-              paste0("140 vs 140" ," = ", "< 1e-04"),
+in2 <- ifelse(in2$p.value < 0.006, 
+              paste0("140 vs 140" ," = ", "< 6e-04"),
               paste0("140 vs 140" ," = ", as.character(round(in2$p.value, 3))))
 
-in3 <- ifelse(in3$p.value < 0.001, 
-              paste0("180 vs 180" ," = ", "< 1e-04"),
+in3 <- ifelse(in3$p.value < 0.006, 
+              paste0("180 vs 180" ," = ", "< 6e-04"),
               paste0("180 vs 180" ," = ", as.character(round(in3$p.value, 3))))
 
 
@@ -132,8 +135,8 @@ wt2n <- wilcox.test(data100n,data180n)
 wt3n <- wilcox.test(data140n,data180n)
 
 wt1n <- paste0("100 vs 140" ," = ", as.character(round(wt1n$p.value, 3)))
-wt2n <- paste0("100 vs 140" ," = ", as.character(round(wt2n$p.value, 3)))
-wt3n <- paste0("100 vs 140" ," = ", as.character(round(wt3n$p.value, 3)))
+wt2n <- paste0("100 vs 180" ," = ", as.character(round(wt2n$p.value, 3)))
+wt3n <- paste0("140 vs 180" ," = ", as.character(round(wt3n$p.value, 3)))
 
 
 mtodasplotPV <- mtodasplotmedian +
